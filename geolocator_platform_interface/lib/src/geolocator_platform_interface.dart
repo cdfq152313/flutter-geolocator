@@ -153,6 +153,7 @@ abstract class GeolocatorPlatform extends PlatformInterface {
     LocationAccuracy desiredAccuracy = LocationAccuracy.best,
     int distanceFilter = 0,
     bool forceAndroidLocationManager = false,
+    bool iosPausesLocationUpdatesAutomatically = true,
     int timeInterval = 0,
     Duration? timeLimit,
   }) {

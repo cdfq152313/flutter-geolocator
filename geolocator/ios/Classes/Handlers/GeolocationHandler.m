@@ -25,6 +25,7 @@
 
 - (void)startListeningWithDesiredAccuracy:(CLLocationAccuracy)desiredAccuracy
                            distanceFilter:(CLLocationDistance)distanceFilter
+                           pausesLocationUpdatesAutomatically:(BOOL)pausesLocationUpdatesAutomatically
                             resultHandler:(GeolocatorResult _Nonnull )resultHandler
                              errorHandler:(GeolocatorError _Nonnull)errorHandler {
     
@@ -34,6 +35,7 @@
     CLLocationManager *locationManager = self.locationManager;
     locationManager.desiredAccuracy = desiredAccuracy;
     locationManager.distanceFilter = distanceFilter == 0 ? kCLDistanceFilterNone : distanceFilter;
+    [locationManager setPausesLocationUpdatesAutomatically:pausesLocationUpdatesAutomatically];
     if (@available(iOS 9.0, *)) {
         locationManager.allowsBackgroundLocationUpdates = [GeolocationHandler shouldEnableBackgroundLocationUpdates];
     }
