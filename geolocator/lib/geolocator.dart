@@ -299,6 +299,7 @@ class Geolocator {
     LocationAccuracy desiredAccuracy = LocationAccuracy.best,
     int distanceFilter = 0,
     bool forceAndroidLocationManager = false,
+    bool iosPausesLocationUpdatesAutomatically = true,
     @Deprecated('The timeInterval parameter has been deprecated, use the '
         'intervalDuration parameter instead')
         int timeInterval = 0,
@@ -309,6 +310,8 @@ class Geolocator {
         desiredAccuracy: desiredAccuracy,
         distanceFilter: distanceFilter,
         forceAndroidLocationManager: forceAndroidLocationManager,
+        iosPausesLocationUpdatesAutomatically:
+            iosPausesLocationUpdatesAutomatically,
         timeInterval: intervalDuration?.inMilliseconds ?? timeInterval,
         timeLimit: timeLimit,
       );
