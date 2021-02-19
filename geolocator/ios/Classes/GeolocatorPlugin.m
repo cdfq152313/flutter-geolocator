@@ -117,6 +117,7 @@
         
         [geolocationHandler startListeningWithDesiredAccuracy:accuracy
                                                distanceFilter:distanceFilter
+                                               pausesLocationUpdatesAutomatically: YES
                                                 resultHandler:^(CLLocation *location) {
             [geolocationHandler stopListening];
             
