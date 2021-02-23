@@ -64,6 +64,18 @@ class MethodChannelGeolocator extends GeolocatorPlatform {
   }
 
   @override
+  Future<bool> changeAccuracy(LocationAccuracy desiredAccuracy) async {
+    try {
+      return await methodChannel.invokeMethod(
+          'changeAccuracy', desiredAccuracy.index);
+    } on PlatformException catch (e) {
+      _handlePlatformException(e);
+
+      rethrow;
+    }
+  }
+
+  @override
   Future<bool> isLocationServiceEnabled() async =>
       methodChannel.invokeMethod('isLocationServiceEnabled');
 

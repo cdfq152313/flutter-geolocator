@@ -316,6 +316,10 @@ class Geolocator {
         timeLimit: timeLimit,
       );
 
+  /// Change accuracy
+  static Future<bool> changeAccuracy(LocationAccuracy desiredAccuracy) =>
+      GeolocatorPlatform.instance.changeAccuracy(desiredAccuracy);
+
   /// Opens the App settings page.
   ///
   /// Returns [true] if the location settings page could be opened, otherwise

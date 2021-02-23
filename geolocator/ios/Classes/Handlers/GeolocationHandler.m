@@ -50,6 +50,10 @@
     self.resultHandler = nil;
 }
 
+- (void)changeAccuracy:(CLLocationAccuracy)desiredAccuracy {
+    self.locationManager.desiredAccuracy = desiredAccuracy;
+}
+
 - (CLLocationManager *) locationManager {
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];

@@ -48,7 +48,11 @@
         [self openSettings:result];
     } else if ([@"openLocationSettings" isEqualToString:call.method]) {
         [self openSettings:result];
-    } else { 
+    } else if ([@"changeAccuracy" isEqualToString:call.method]) {
+        CLLocationAccuracy accuracy = [LocationAccuracyMapper toCLLocationAccuracy:(NSNumber *)call.arguments];
+        [[self geolocationHandler] changeAccuracy: accuracy];
+        result([[NSNumber alloc] initWithBool:YES]);
+    } else {
         result(FlutterMethodNotImplemented);
     }
 }

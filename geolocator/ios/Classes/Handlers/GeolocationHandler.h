@@ -22,4 +22,7 @@ typedef void (^GeolocatorResult)(CLLocation *_Nullable location);
                              errorHandler:(GeolocatorError _Nonnull)errorHandler;
 
 - (void)stopListening;
+
+- (void)changeAccuracy:(CLLocationAccuracy)desiredAccuracy;
+
 @end

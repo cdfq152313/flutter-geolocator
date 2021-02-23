@@ -152,6 +152,11 @@ abstract class GeolocatorPlatform extends PlatformInterface {
     throw UnimplementedError('getPositionStream() has not been implemented.');
   }
 
+  /// Change accuracy
+  Future<bool> changeAccuracy(LocationAccuracy desiredAccuracy) {
+    throw UnimplementedError('');
+  }
+
   /// Opens the App settings page.
   ///
   /// Returns [true] if the app settings page could be opened, otherwise
