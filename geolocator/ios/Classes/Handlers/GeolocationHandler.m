@@ -35,6 +35,7 @@
     CLLocationManager *locationManager = self.locationManager;
     locationManager.desiredAccuracy = desiredAccuracy;
     locationManager.distanceFilter = distanceFilter == 0 ? kCLDistanceFilterNone : distanceFilter;
+    locationManager.activityType = CLActivityTypeAutomotiveNavigation;
     [locationManager setPausesLocationUpdatesAutomatically:pausesLocationUpdatesAutomatically];
     if (@available(iOS 9.0, *)) {
         locationManager.allowsBackgroundLocationUpdates = [GeolocationHandler shouldEnableBackgroundLocationUpdates];
