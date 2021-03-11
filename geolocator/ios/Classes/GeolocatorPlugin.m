@@ -13,8 +13,10 @@
 @property (strong, nonatomic) PermissionHandler *permissionHandler;
 @end
 
+#define DelegateChannelName @"flutter.baseflow.com/geolocator_delegate"
 @implementation GeolocatorPlugin {
     FlutterEventSink _eventSink;
+    FlutterEventSink _delegateSink;
 }
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -25,9 +27,14 @@
                                          eventChannelWithName:@"flutter.baseflow.com/geolocator_updates"
                                          binaryMessenger:registrar.messenger];
     
+    FlutterEventChannel *delegateChannel = [FlutterEventChannel
+                                         eventChannelWithName:DelegateChannelName
+                                         binaryMessenger:registrar.messenger];
+
     GeolocatorPlugin *instance = [[GeolocatorPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:methodChannel];
     [eventChannel setStreamHandler:instance];
+    [delegateChannel setStreamHandler:instance];
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
@@ -58,6 +65,19 @@
 }
 
 - (FlutterError *_Nullable)onListenWithArguments:(id _Nullable)arguments eventSink:(FlutterEventSink)eventSink {
+    NSString *channelName = arguments[@"channelName"];
+
+    NSLog(@"channelName: %@", channelName);
+    if ([channelName isEqualToString: DelegateChannelName]) {
+        if (_delegateSink) {
+            return nil;
+        }
+
+        _delegateSink = eventSink;
+
+        return nil;
+    }
+
     if (_eventSink) {
         return [FlutterError errorWithCode: GeolocatorErrorLocationSubscriptionActive
                                    message: @"Already listening for location updates. If you want to restart listening please cancel other subscriptions first."
@@ -213,6 +233,12 @@
 - (GeolocationHandler *) geolocationHandler {
     if (!_geolocationHandler) {
         _geolocationHandler = [[GeolocationHandler alloc] init];
+        _geolocationHandler.delegateHandler = ^(NSString *message) {
+            _delegateSink(@{
+                       @"message" : message
+                   });
+        };
+
     }
     return _geolocationHandler;
 }

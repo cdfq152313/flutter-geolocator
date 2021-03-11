@@ -10,8 +10,11 @@
 
 typedef void (^GeolocatorError)(NSString *_Nonnull errorCode, NSString *_Nonnull  errorDescription);
 typedef void (^GeolocatorResult)(CLLocation *_Nullable location);
+typedef void (^DelegateResult)(NSString *message);
 
 @interface GeolocationHandler : NSObject
+
+@property (strong, nonatomic) DelegateResult delegateHandler;
 
 - (CLLocation *_Nullable)getLastKnownPosition;
 

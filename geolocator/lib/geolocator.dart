@@ -316,6 +316,8 @@ class Geolocator {
         timeLimit: timeLimit,
       );
 
+  static Stream<Map<String, dynamic>> getDelegateStream() => GeolocatorPlatform.instance.getDelegateStream();
+
   /// Change accuracy
   static Future<bool> changeAccuracy(LocationAccuracy desiredAccuracy) =>
       GeolocatorPlatform.instance.changeAccuracy(desiredAccuracy);

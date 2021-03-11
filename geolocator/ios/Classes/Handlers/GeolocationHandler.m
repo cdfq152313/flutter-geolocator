@@ -19,6 +19,7 @@
 
 @implementation GeolocationHandler
 
+
 - (CLLocation *)getLastKnownPosition {
     return [self.locationManager location];
 }
@@ -70,6 +71,10 @@
     if ([locations lastObject]) {
         self.resultHandler([locations lastObject]);
     }
+}
+
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager {
+    self.delegateHandler(@"locationManagerDidPauseLocationUpdates");
 }
 
 - (void)locationManager:(CLLocationManager *)manager
