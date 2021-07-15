@@ -11,8 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   
-  geolocator_platform_interface: ^2.2.0
-  geolocator_web: ^2.0.1
+  geolocator_platform_interface:
+    git:
+      url: https://github.com/cdfq152313/flutter-geolocator
+      path: geolocator_platform_interface
+      ref: 510e6ff781bba06f83bbd061d86cac75266f323b
+#  geolocator_web: ^2.0.1
 
 dev_dependencies:
   flutter_test:
